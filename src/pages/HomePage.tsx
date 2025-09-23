@@ -4,6 +4,7 @@ import '../App.css'
 import type { Movie } from '../type';
 import { getBocchi } from '../api';
 import { MovieCard } from '../molecules/MovieCard';
+import { Carousel } from '../molecules/Carousel';
 
 
 
@@ -14,16 +15,16 @@ export default function Home() {
 
 
 
-  useEffect(  () => {
-    const fetch = async ()=>{
-    if (!bocchi) {
-    const fetchedBocchi =  await getBocchi()
-    setBocchi(fetchedBocchi)
+  useEffect(() => {
+    const fetch = async () => {
+      if (!bocchi) {
+        const fetchedBocchi = await getBocchi()
+        setBocchi(fetchedBocchi)
+      }
+
     }
-    
-  }
-  fetch()
-  }, [bocchi,setBocchi])
+    fetch()
+  }, [bocchi, setBocchi])
 
 
   async function loadData() {
@@ -43,7 +44,7 @@ export default function Home() {
   return (<>
     <h1> MyCrunchyList</h1>
     {
-      data ? <MovieCard mov={data} />
+      data ? <Carousel mov={data} />
         : <div> rien a afficher ici </div>
 
     }

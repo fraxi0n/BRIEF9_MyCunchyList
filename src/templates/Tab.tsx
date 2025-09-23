@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 interface Props  { pString? : string }
 
-export function Exemple( {  pString} :Props) {
+export function Tab( {  pString} :Props) {
 
   const [string, setString] = useState <string> (pString?pString:"")
   useEffect(
@@ -22,6 +22,8 @@ export function Exemple( {  pString} :Props) {
     <p>
       {string}
     </p>
+
+    
 
 
 
