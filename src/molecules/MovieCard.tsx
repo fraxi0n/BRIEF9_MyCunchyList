@@ -14,8 +14,8 @@ export function MovieCard({ mov }: Props) {
           <div className="card-image">
             <figure className="image is-4by3">
               <img
-                src="https://bulma.io/assets/images/placeholders/1280x960.png"
-                alt="Placeholder image"
+                src={mov.poster_path?mov.poster_path:""}
+                alt={mov.id.toString()}
               />
             </figure>
           </div>
@@ -30,34 +30,19 @@ export function MovieCard({ mov }: Props) {
                 </figure>
               </div>
               <div className="media-content">
-                <p className="title is-4">John Smith</p>
-                <p className="subtitle is-6">@johnsmith</p>
+                <p className="title is-4">{mov.title}</p>
+                <p className="subtitle is-6">{}</p>
               </div>
             </div>
 
             <div className="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-              iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-              <a href="#">#responsive</a>
+              Genre :
+        {mov.genres.map((g) => <> { g.name+" " }</>)}
               <br />
-              <time dateTime={mov.release_date}></time>
+              <time dateTime={mov.release_date}> {mov.release_date}</time>
             </div>
           </div>
         </div>
-
-        <div>
-          {mov.release_date}
-        </div>
-        <div>
-          {mov.popularity}
-        </div>
-        <div>
-          {mov.vote_average}
-        </div>
-        <div>
-          {mov.vote_count}
-        </div>
-        {mov.genres.map((g) => <p> {g.name}</p>)}
       </div>
     </>
   )

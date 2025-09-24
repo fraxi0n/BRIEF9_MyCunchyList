@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import '../App.css'
 import type { Movie } from '../type';
 import { getBocchi } from '../api';
-import { MovieCard } from '../molecules/MovieCard';
 import { Carousel } from '../molecules/Carousel';
 
 
