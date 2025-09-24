@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
 interface Props { mov: Movie, title?: string, numberColumn: 1 | 3 | 5 }
@@ -21,26 +21,25 @@ export function Carousel({ mov, title = "", numberColumn }: Props) {
 
   const doubleMovies = [...movies, ...movies]
 
-  useEffect(
-    () => {
+  const setIndexWithWatch = (pIndex : number ) =>
+  {
+    let targetIndex = pIndex
 
-
-      const indexTooHight  = index + numberColumn - doubleMovies.length
+      const indexTooHight  = (targetIndex + numberColumn) - doubleMovies.length
       if (indexTooHight> 0) {
-        setIndex( movies.length + indexTooHight - numberColumn )
+        targetIndex = (movies.length + indexTooHight )- numberColumn 
       }
       
-      const indexTooLow  = 0-index
-      if (indexTooLow > 0) {
-        setIndex( movies.length - indexTooLow)
+      const indexTooLow  = targetIndex
+      if (indexTooLow < 0) {
+        targetIndex =  movies.length - indexTooLow
       }
-    }
-    ,
-    [movies.length, index, doubleMovies.length, numberColumn]
-  )
+    
+    setIndex(targetIndex)
+  }
 
   const getCarButton = (incValue: number) => {
-    const incFunc = () => { setIndex((index) => index + incValue) }
+    const incFunc = () => { setIndexWithWatch( index + incValue) }
 
     if (incValue < 0 )
     {
