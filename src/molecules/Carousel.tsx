@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
-interface Props { mov: Movie, title?: string, isMobile: boolean }
+interface Props { mov: Movie, title?: string, numberColumn: 1 | 3 | 5 }
 
-export function Carousel({ mov, title = "", isMobile }: Props) {
+export function Carousel({ mov, title = "", numberColumn }: Props) {
 
   const [index, setIndex] = useState<number>(0)
   const movies: Movie[] = []
 
-  type NumberCardDisplay = 4 | -4
-  const numberCardDisplay : NumberCardDisplay = 4
 
   movies.push({ ...mov, id: 1 })
   movies.push({ ...mov, id: 2 })
@@ -25,22 +23,24 @@ export function Carousel({ mov, title = "", isMobile }: Props) {
 
   useEffect(
     () => {
-      if (index + numberCardDisplay >= doubleMovies.length) {
-        const diff = index + numberCardDisplay - doubleMovies.length
-        setIndex(doubleMovies.length / 2+ diff - numberCardDisplay )
+
+
+      const indexTooHight  = index + numberColumn - doubleMovies.length
+      if (indexTooHight> 0) {
+        setIndex( movies.length + indexTooHight - numberColumn )
       }
-      if (index <= 0) {
-        const diff = 0-index
-        setIndex(doubleMovies.length / 2 - diff)
+      
+      const indexTooLow  = 0-index
+      if (indexTooLow > 0) {
+        setIndex( movies.length - indexTooLow)
       }
     }
     ,
-    [doubleMovies.length, index]
+    [movies.length, index, doubleMovies.length, numberColumn]
   )
 
-  const getCarButton = (incValue: 1 | -1 |  NumberCardDisplay) => {
+  const getCarButton = (incValue: number) => {
     const incFunc = () => { setIndex((index) => index + incValue) }
-
 
     if (incValue < 0 )
     {
@@ -58,15 +58,15 @@ export function Carousel({ mov, title = "", isMobile }: Props) {
   }
 
   const getDesktopView = () => {
-    const domReturn = doubleMovies.slice(index, index + 4).map((mov) => <MovieCard mov={mov}></MovieCard>)
+    const domReturn = doubleMovies.slice(index, index + numberColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
 
 
     return <div className='is-flex'>
-      {getCarButton(-4)}
+      {getCarButton(-numberColumn)}
       {getCarButton(-1)}
       {domReturn}
       {getCarButton(+1)}
-      {getCarButton(+4)}
+      {getCarButton(+numberColumn)}
     </div>
   }
 
@@ -77,7 +77,7 @@ export function Carousel({ mov, title = "", isMobile }: Props) {
     <>
       <h3>Carousel {" " + title}</h3>
       {
-        isMobile ?
+        numberColumn===1 ?
           getMobileView()
           :
           getDesktopView()
