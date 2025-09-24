@@ -28,6 +28,7 @@ interface Movie {
   genres: Genre[];
   homepage: string;
   id: number;
+  // image: 
   imdb_id: string | null;
   origin_country: string[];
   original_language: string;

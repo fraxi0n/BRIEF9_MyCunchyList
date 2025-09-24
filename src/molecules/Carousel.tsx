@@ -1,23 +1,23 @@
 import {  useState } from 'react';
 import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
-interface Props { mov: Movie, title?: string, numberColumn: 1 | 3 | 5 }
+interface Props { movies: Movie [], title?: string, numberColumn: 1 | 3 | 5 }
 
-export function Carousel({ mov, title = "", numberColumn }: Props) {
+export function Carousel({ movies, title = "", numberColumn }: Props) {
 
   const [index, setIndex] = useState<number>(0)
-  const movies: Movie[] = []
+  // const movies: Movie[] = []
 
 
-  movies.push({ ...mov, id: 1 })
-  movies.push({ ...mov, id: 2 })
-  movies.push({ ...mov, id: 3 })
-  movies.push({ ...mov, id: 4 })
-  movies.push({ ...mov, id: 5 })
-  movies.push({ ...mov, id: 6 })
-  movies.push({ ...mov, id: 7 })
-  movies.push({ ...mov, id: 8 })
-  movies.push({ ...mov, id: 9 })
+  // movies.push({ ...mov, id: 1 })
+  // movies.push({ ...mov, id: 2 })
+  // movies.push({ ...mov, id: 3 })
+  // movies.push({ ...mov, id: 4 })
+  // movies.push({ ...mov, id: 5 })
+  // movies.push({ ...mov, id: 6 })
+  // movies.push({ ...mov, id: 7 })
+  // movies.push({ ...mov, id: 8 })
+  // movies.push({ ...mov, id: 9 })
 
   const doubleMovies = [...movies, ...movies]
 
