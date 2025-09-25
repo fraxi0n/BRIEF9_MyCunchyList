@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
 interface Props { movies: Movie [], title?: string, numberColumn: 1 | 3 | 5 }
@@ -6,21 +6,28 @@ interface Props { movies: Movie [], title?: string, numberColumn: 1 | 3 | 5 }
 export function CarouselV2({ movies, title = "", numberColumn }: Props) {
 
   const [index, setIndex] = useState<number>(0)
+  const [extendedMovies, setExtendedMovies] = useState<Movie[]>([])
 
-  const doubleMovies = [...movies, ...movies]
+  useEffect(()=>{
+    const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  )
+    console.log (moviesINDEXED)
+    //on au lieu de doubler le tableau on calcul pile ce dont on a besoin 
+    setExtendedMovies(  [ ...movies , ...movies.slice(0,numberColumn-1) ]   )   
+  },[movies,numberColumn]
+  )
 
-  const setIndexWithWatch = (pIndex : number ) =>
+
+  const setIndexWithWatch = (pIndex : number) =>
   {
     let targetIndex = pIndex
-
-      const indexTooHight  = (targetIndex + numberColumn) - doubleMovies.length
-      if (indexTooHight> 0) {
-        targetIndex = (movies.length + indexTooHight )- numberColumn 
+    
+    //calcul beaucoup plus clair 
+    // /!\ on calcul bien sur la taille de movies et non extendedMovies (nb reel de films )  
+      if (targetIndex> movies.length) {
+        targetIndex -= movies.length
       }
-      
-      const indexTooLow  = targetIndex
-      if (indexTooLow < 0) {
-        targetIndex =  movies.length - indexTooLow
+      if (targetIndex < 0) {
+        targetIndex += movies.length
       }
     
     setIndex(targetIndex)
@@ -45,7 +52,7 @@ export function CarouselV2({ movies, title = "", numberColumn }: Props) {
   }
 
   const getDesktopView = () => {
-    const domReturn = doubleMovies.slice(index, index + numberColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
+    const domReturn = extendedMovies.slice(index, index + numberColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
 
 
     return <div className='is-flex'>
