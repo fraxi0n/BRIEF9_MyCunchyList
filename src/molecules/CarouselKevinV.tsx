@@ -3,7 +3,7 @@ import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
 interface Props { movies: Movie [], title?: string, numberColumn: 1 | 3 | 5 }
 
-export function Carousel({ movies, title = "", numberColumn }: Props) {
+export function CarouselKevinV({ movies, title = "", numberColumn }: Props) {
 
   const [index, setIndex] = useState<number>(0)
 

@@ -9,36 +9,34 @@ import type { Movie } from "./type"
   }
 }
 
-const useCustomFetch = ()=> {
+//export const useCustomFetch = ()=> {
 
+//   useEffect(() => {
 
+//     const customFetch = async () => {
+//       try {
+//         const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=fr&page=1', apiOptions)
+//         const parseRes = await response.json()
+//         const typedRes: Movie[] = parseRes.results
+//         return typedRes
+//       }
+//       catch (error) {
+//         console.log(error
+//         )
+//         return []
+//       };
 
-  useEffect(() => {
+//     }
 
-    const customFetch = async () => {
-      try {
-        const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=fr&page=1', apiOptions)
-        const parseRes = await response.json()
-        const typedRes: Movie[] = parseRes.results
-        return typedRes
-      }
-      catch (error) {
-        console.log(error
-        )
-        return []
-      };
+//     customFetch()
 
-    }
+//   }, [])
 
-    customFetch()
-
-  }, [])
-
-  return {}
-}
-
+//   return {}
+// }
 
 
 
 
-export{  useCustomFetch } 
+
+export{ apiOptions } 

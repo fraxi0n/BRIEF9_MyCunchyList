@@ -4,6 +4,7 @@ import '../App.css'
 import type { Movie } from '../type';
 import { apiOptions } from '../api';
 import { Carousel } from '../molecules/Carousel';
+import { CarouselV2 } from '../molecules/CarouselV2';
 
 
 
@@ -71,7 +72,14 @@ export default function Home() {
     {
       popMovie ? <Carousel movies={popMovie} numberColumn={numberColumn} />
         : <div> rien a afficher ici </div>
-
+    }
+        {
+      popMovie ? <CarouselV2 movies={popMovie} numberColumn={numberColumn} />
+        : <div> rien a afficher ici </div>
+    }
+        {
+      popMovie ? <Carousel movies={popMovie} numberColumn={numberColumn} />
+        : <div> rien a afficher ici </div>
     }
   </>)
 
