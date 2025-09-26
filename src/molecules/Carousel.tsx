@@ -7,8 +7,10 @@ export function Carousel({ movies, title = "", numberColumn }: Props) {
 
   const [index, setIndex] = useState<number>(0)
 
+     const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  ) // exemple 
 
-  const doubleMovies = [...movies, ...movies]
+
+  const doubleMovies = [...moviesINDEXED, ...moviesINDEXED]
 
   const setIndexWithWatch = (pIndex : number ) =>
   {
@@ -70,7 +72,6 @@ export function Carousel({ movies, title = "", numberColumn }: Props) {
           :
           getDesktopView()
       }
-
     </>
   )
 }

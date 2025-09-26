@@ -12,7 +12,7 @@ export function CarouselV2({ movies, title = "", numberColumn }: Props) {
     const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  )
     console.log (moviesINDEXED)
     //on au lieu de doubler le tableau on calcul pile ce dont on a besoin 
-    setExtendedMovies(  [ ...movies , ...movies.slice(0,numberColumn-1) ]   )   
+    setExtendedMovies(  [ ...moviesINDEXED , ...moviesINDEXED.slice(0,numberColumn-1) ]   )   
   },[movies,numberColumn]
   )
 

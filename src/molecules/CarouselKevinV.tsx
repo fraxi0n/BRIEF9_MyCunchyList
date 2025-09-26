@@ -8,22 +8,15 @@ export function CarouselKevinV({ movies, title = "", numberColumn }: Props) {
   const [index, setIndex] = useState<number>(0)
 
 
-  const doubleMovies = [...movies, ...movies]
+       const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  ) // exemple 
+
+
+  const doubleMovies = [...moviesINDEXED, ...moviesINDEXED]
+  
 
   const setIndexWithWatch = (pIndex : number ) =>
   {
-    let targetIndex = pIndex
-
-      const indexTooHight  = (targetIndex + numberColumn) - doubleMovies.length
-      if (indexTooHight> 0) {
-        targetIndex = (movies.length + indexTooHight )- numberColumn 
-      }
-      
-      const indexTooLow  = targetIndex
-      if (indexTooLow < 0) {
-        targetIndex =  movies.length - indexTooLow
-      }
-    
+    const  targetIndex = (pIndex + movies.length ) % movies.length 
     setIndex(targetIndex)
   }
 

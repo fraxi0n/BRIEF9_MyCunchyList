@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react'
 import '../App.css'
 import type { Movie } from '../type';
 import { apiOptions } from '../api';
-import { Carousel } from '../molecules/Carousel';
-import { CarouselV2 } from '../molecules/CarouselV2';
+import { RandomCarousel } from '../molecules/RandomCarousel';
 
 
 
@@ -70,15 +69,7 @@ export default function Home() {
   return (<>
     <h1> MyCrunchyList</h1>
     {
-      popMovie ? <Carousel movies={popMovie} numberColumn={numberColumn} />
-        : <div> rien a afficher ici </div>
-    }
-        {
-      popMovie ? <CarouselV2 movies={popMovie} numberColumn={numberColumn} />
-        : <div> rien a afficher ici </div>
-    }
-        {
-      popMovie ? <Carousel movies={popMovie} numberColumn={numberColumn} />
+      popMovie ? <RandomCarousel movies={popMovie} numberColumn={numberColumn} />
         : <div> rien a afficher ici </div>
     }
   </>)
