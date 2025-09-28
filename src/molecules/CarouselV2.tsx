@@ -1,12 +1,18 @@
 import {  useEffect, useState } from 'react';
 import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
-interface Props { movies: Movie [], title?: string, numberColumn: 1 | 3 | 5 }
+import { useFetch, type SearchOptionType } from '../hooks/useApi';
+interface Props { moviesSearch:  SearchOptionType, title?: string, numberColumn: 1 | 3 | 5 }
 
-export function CarouselV2({ movies, title = "", numberColumn }: Props) {
+export function CarouselV2({ moviesSearch , title = "", numberColumn }: Props) {
 
   const [index, setIndex] = useState<number>(0)
   const [extendedMovies, setExtendedMovies] = useState<Movie[]>([])
+
+
+  const movies = useFetch(moviesSearch)
+
+
 
   useEffect(()=>{
     const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  )

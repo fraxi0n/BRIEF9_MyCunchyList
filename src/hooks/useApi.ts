@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import type { Movie } from "../type"
 
 const apiOptions = {
@@ -9,13 +9,27 @@ const apiOptions = {
   }
 }
 
-export const useCustomFetch = ()=> {
+
+const url = {
+  popular : "/3/movie/popular?language=fr&page=1" ,
+  new : "/3/movie/popular?language=fr&page=1" ,
+  top_Rated : "/3/movie/popular?language=fr&page=1" ,
+} 
+
+export type SearchOptionType  = keyof typeof  url  
+
+
+export const useFetch = ( search :SearchOptionType )=> {
+
+  const [movies , setMovies] = useState<Movie[]> ([])
+
   useEffect(() => {
     const customFetch = async () => {
       try {
-        const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=fr&page=1', apiOptions)
+        const response = await fetch('https://api.themoviedb.org'+url[search], apiOptions)
         const parseRes = await response.json()
         const typedRes: Movie[] = parseRes.results
+        setMovies(typedRes)
         return typedRes
       }
       catch (error) {
@@ -29,11 +43,11 @@ export const useCustomFetch = ()=> {
 
   }, [])
 
-  return {}
+  return movies
 }
 
 
 
 
 
-export{ apiOptions } 
+export{ apiOptions  } 
