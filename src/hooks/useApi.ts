@@ -41,7 +41,7 @@ export const useFetch = ( search :SearchOptionType )=> {
     }
     customFetch()
 
-  }, [])
+  }, [search])
 
   return movies
 }

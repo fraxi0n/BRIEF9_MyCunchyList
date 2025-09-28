@@ -2,12 +2,15 @@ import {  useEffect, useState } from 'react';
 import type { Movie } from '../type';
 import { MovieCard } from './MovieCard';
 import { useFetch, type SearchOptionType } from '../hooks/useApi';
-interface Props { moviesSearch:  SearchOptionType, title?: string, numberColumn: 1 | 3 | 5 }
+import { useScreenWatch } from '../hooks/useScreenWatch';
+interface Props { moviesSearch:  SearchOptionType }
 
-export function CarouselV2({ moviesSearch , title = "", numberColumn }: Props) {
+export function CarouselV2({ moviesSearch  }: Props) {
 
   const [index, setIndex] = useState<number>(0)
   const [extendedMovies, setExtendedMovies] = useState<Movie[]>([])
+
+  const SW = useScreenWatch()
 
 
   const movies = useFetch(moviesSearch)
@@ -18,8 +21,8 @@ export function CarouselV2({ moviesSearch , title = "", numberColumn }: Props) {
     const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  )
     console.log (moviesINDEXED)
     //on au lieu de doubler le tableau on calcul pile ce dont on a besoin 
-    setExtendedMovies(  [ ...moviesINDEXED , ...moviesINDEXED.slice(0,numberColumn-1) ]   )   
-  },[movies,numberColumn]
+    setExtendedMovies(  [ ...moviesINDEXED , ...moviesINDEXED.slice(0,SW.carColumn-1) ]   )   
+  },[movies,SW.carColumn]
   )
 
 
@@ -58,15 +61,15 @@ export function CarouselV2({ moviesSearch , title = "", numberColumn }: Props) {
   }
 
   const getDesktopView = () => {
-    const domReturn = extendedMovies.slice(index, index + numberColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
+    const domReturn = extendedMovies.slice(index, index + SW.carColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
 
 
     return <div className='is-flex is-fullwidth'>
-      {getCarButton(-numberColumn)}
+      {getCarButton(-SW.carColumn)}
       {getCarButton(-1)}
       {domReturn}
       {getCarButton(+1)}
-      {getCarButton(+numberColumn)}
+      {getCarButton(+SW.carColumn)}
     </div>
   }
 
@@ -77,7 +80,7 @@ export function CarouselV2({ moviesSearch , title = "", numberColumn }: Props) {
     <>
       <h3> { moviesSearch}</h3>
       {
-        numberColumn===1 ?
+        SW.isMobile ?
           getMobileView()
           :
           getDesktopView()
