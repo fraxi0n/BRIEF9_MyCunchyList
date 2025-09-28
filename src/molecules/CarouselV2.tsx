@@ -75,7 +75,7 @@ export function CarouselV2({ moviesSearch , title = "", numberColumn }: Props) {
 
   return (
     <>
-      <h3>Carousel {" " + title}</h3>
+      <h3> { moviesSearch}</h3>
       {
         numberColumn===1 ?
           getMobileView()

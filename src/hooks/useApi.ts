@@ -12,8 +12,8 @@ const apiOptions = {
 
 const url = {
   popular : "/3/movie/popular?language=fr&page=1" ,
-  new : "/3/movie/popular?language=fr&page=1" ,
-  top_Rated : "/3/movie/popular?language=fr&page=1" ,
+  upcoming : "/3/movie/upcoming?language=fr&page=1" ,
+  top_rated : "/3/movie/top_rated?language=fr&page=1" ,
 } 
 
 export type SearchOptionType  = keyof typeof  url  
