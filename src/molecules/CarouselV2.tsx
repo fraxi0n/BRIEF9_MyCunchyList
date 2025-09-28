@@ -55,7 +55,7 @@ export function CarouselV2({ movies, title = "", numberColumn }: Props) {
     const domReturn = extendedMovies.slice(index, index + numberColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
 
 
-    return <div className='is-flex'>
+    return <div className='is-flex is-fullwidth'>
       {getCarButton(-numberColumn)}
       {getCarButton(-1)}
       {domReturn}

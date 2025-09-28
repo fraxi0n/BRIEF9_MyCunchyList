@@ -1,31 +1,47 @@
 import { useEffect, useState } from 'react';
-interface Props  { pString? : string }
+import { useScreenWatch } from '../hooks/useScreenWatch';
+import { CarouselV2 } from '../molecules/CarouselV2';
+interface Props  { tabNames  : string []}
 
-export function Tab( {  pString} :Props) {
+export function Tab( {  tabNames} :Props) {
 
-  const [string, setString] = useState <string> (pString?pString:"")
-  useEffect(
-    ()=>{
+  // const [index, setIndex] = useState (0)
 
-      if (!string)
-      {
-        setString("placeholder")
-      }
-      console.log(string)
-    }
-    ,
-    [string]
-  )
+  const SW = useScreenWatch()
+
+  const tabDom = () => {
+
+
+    return <> {tabNames.map(tabName => {return <button> {tabName}</button>}
+    )}
+    </>
+      
+    
+  }
+
+
+
+
+
+  const mobileView = () =>  {<>
+  {tabDom}
+   <CarouselV2 movies={[]} numberColumn={1} />
+  
+  </>}
+
+    const desktopView = () =>  {return<>
+     {tabDom}
+    {tabDom}
+  
+  </>}
+
+
 
   return (
     <>
-    <p>
-      {string}
-    </p>
 
-    
-
-
+      {SW.isMobile? mobileView() : desktopView()
+      }
 
     </>
   )

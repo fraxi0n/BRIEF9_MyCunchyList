@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 
-import '../App.css'
+import './MovieCard.css'
 import type { Movie } from '../type';
 interface Props { mov: Movie }
 
@@ -10,7 +10,7 @@ export function MovieCard({ mov }: Props) {
   return (
     <>
       
-        <div className={"card movieCard"}>
+        <div className={"card movie-card"}>
           <div className="card-image">
             <figure className="image ">
               <img
@@ -22,15 +22,9 @@ export function MovieCard({ mov }: Props) {
           <div className="card-content">
             <div className="media">
               <div className="media-left">
-                <figure className="image is-48x48">
-                  <img
-                    src="https://bulma.io/assets/images/placeholders/96x96.png"
-                    alt="Placeholder image"
-                  />
-                </figure>
               </div>
               <div className="media-content">
-                <p className="title is-4">{mov.title}</p>
+                <p className="title is-6">{mov.title}</p>
                 <p className="subtitle is-6">{ }</p>
               </div>
             </div>

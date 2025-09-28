@@ -2,18 +2,21 @@ import { useEffect, useState } from 'react'
 
 import '../App.css'
 import type { Movie } from '../type';
-import { apiOptions } from '../api';
-import { RandomCarousel } from '../molecules/RandomCarousel';
+import { apiOptions } from '../hooks/useApi';
+// import { RandomCarousel } from '../molecules/RandomCarousel';
+import { CarouselV2 } from '../molecules/CarouselV2';
+import { useScreenWatch } from '../hooks/useScreenWatch';
+import { Tab } from '../templates/Tab';
 
 
 
 export default function Home() {
   // const [count, setCount] = useState(0)
   const [popMovie, setPopMovie] = useState <Movie[]>([])
+  
 
+  const SW = useScreenWatch()
 
-  type NumberColumn = 1 | 3 | 5
-  const [numberColumn, setNumberColumn] = useState<NumberColumn>(1);
 
   useEffect(() => {
 
@@ -43,35 +46,19 @@ export default function Home() {
 
   }, [popMovie])
 
-  useEffect(() => {
-    const handleResize = () => {
-      const newW = window.innerWidth
-      if (newW > 1400) {
-        setNumberColumn(5)
-      }
-      else if (newW < 1024) {
-        setNumberColumn(1)
-      }
-      else {
-        setNumberColumn(3)
-      }
-    }
-    handleResize()
-
-
-    window.addEventListener("resize", handleResize);
-
-    // cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
 
   return (<>
     <h1> MyCrunchyList</h1>
-    {
-      popMovie ? <RandomCarousel movies={popMovie} numberColumn={numberColumn} />
+    <Tab tabNames={["test 1 ", "test 2" ]}/>
+        {
+      popMovie ? <CarouselV2 movies={popMovie} numberColumn={SW.carColumn} />
         : <div> rien a afficher ici </div>
     }
+    {/* {
+      popMovie ? <RandomCarousel movies={popMovie} numberColumn={numberColumn} />
+        : <div> rien a afficher ici </div>
+    } */}
   </>)
 
 };
