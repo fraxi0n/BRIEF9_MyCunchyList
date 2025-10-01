@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  Fragment, useState } from 'react';
 import { useScreenWatch } from '../hooks/useScreenWatch';
 import { CarouselV2 } from '../molecules/CarouselV2';
 import type { SearchOptionType } from '../hooks/useApi';
@@ -20,16 +20,14 @@ export function Tab({ tabNames }: Props) {
   }
 
 const tabDom = () => { return <>
- {tabNames.map(name => {return <button className={getButtonClass(name)}
-  onClick={()=> setActiveTab(name)} > {name}</button>}
+ {tabNames.map(name => {return <a href={'#'+name}>
+
+ <button className={getButtonClass(name)}
+  onClick={()=> setActiveTab(name)} > {name}</button>
+  </a>}
     )}
     </>
-      
-    
   }
-
-
-
 
 
   const mobileView = () =>  { return <>
@@ -41,14 +39,13 @@ const tabDom = () => { return <>
     const desktopView = () =>  {return <>
      {tabDom()}
      {
-      tabNames.map( name => {return <CarouselV2 moviesSearch={name}  />  }   )
+      tabNames.map( name => {return  <CarouselV2 moviesSearch={name}  />  }   )
      }
 
   </>}
 
   return (
     <>
-    <h1>BONJOUR</h1>
       {SW.isMobile? mobileView() : desktopView()
       }
     </>

@@ -78,7 +78,7 @@ export function CarouselV2({ moviesSearch  }: Props) {
 
   return (
     <>
-      <h3> { moviesSearch}</h3>
+      <h3 id={moviesSearch}> { moviesSearch}</h3>
       {
         SW.isMobile ?
           getMobileView()
