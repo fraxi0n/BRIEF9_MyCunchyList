@@ -7,16 +7,33 @@ interface Props { mov: Movie }
 export function MovieCard({ mov }: Props) {
 
 
+  const  getPoster = () =>{
+
+    if( mov.poster_path )
+    {
+      console.log(mov.poster_path)
+
+
+      return  <img
+                src={ "https://image.tmdb.org/t/p/w342"+mov.poster_path}
+                alt={mov.id.toString()}
+              />
+
+    }
+
+    return <> img not found</>
+
+
+  }
+
+
   return (
     <>
       
         <div className={"card movie-card"}>
           <div className="card-image">
             <figure className="image ">
-              <img
-                src={mov.poster_path ? mov.poster_path : ""}
-                alt={mov.id.toString()}
-              />
+              {getPoster()}
             </figure>
           </div>
           <div className="card-content">

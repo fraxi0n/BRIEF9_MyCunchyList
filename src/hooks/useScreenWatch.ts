@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 export const  useScreenWatch = ()=> {
 
-    type NumberColumn = 1 | 3 | 5
+    type NumberColumn = 1 | 3 | 4 | 5
   const [numberColumn, setNumberColumn] = useState<NumberColumn>(1);
   const [pxWidth, setPxWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(true);
@@ -16,12 +16,17 @@ export const  useScreenWatch = ()=> {
       const newW = window.innerWidth
       setPxWidth(newW)
 
-      if (newW > 1400) {
+      if (newW > 1880) {
         setNumberColumn(5)
         setIsMobile(false)
         
       }
-      else if (newW < 1024) {
+      else if (newW > 1550) {
+        setNumberColumn(4)
+        setIsMobile(false)
+        
+      }
+      else if (newW < 1200) {
         setNumberColumn(1)
         setIsMobile(true)
       }

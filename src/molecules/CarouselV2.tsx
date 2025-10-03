@@ -8,22 +8,13 @@ interface Props { moviesSearch:  SearchOptionType }
 export function CarouselV2({ moviesSearch  }: Props) {
 
   const [index, setIndex] = useState<number>(0)
-  const [extendedMovies, setExtendedMovies] = useState<Movie[]>([])
 
   const SW = useScreenWatch()
 
 
   const movies = useFetch(moviesSearch)
 
-
-
-  useEffect(()=>{
-    const moviesINDEXED = movies.map((mov,i)=> {return {...mov,id : i+1 }}  )
-    console.log (moviesINDEXED)
-    //on au lieu de doubler le tableau on calcul pile ce dont on a besoin 
-    setExtendedMovies(  [ ...moviesINDEXED , ...moviesINDEXED.slice(0,SW.carColumn-1) ]   )   
-  },[movies,SW.carColumn]
-  )
+  const extMovies = [...movies,...movies]
 
 
   const setIndexWithWatch = (pIndex : number) =>
@@ -47,11 +38,11 @@ export function CarouselV2({ moviesSearch  }: Props) {
 
     if (incValue < 0 )
     {
-      return <button onClick={incFunc} > {incValue === -1 ? '<' : '<<'}   </button>
+      return <button className=' button is-large' onClick={incFunc} > {incValue === -1 ? '<' : '<<'}   </button>
     }
     else 
     {
-      return <button onClick={incFunc} > {incValue === 1 ? '>' : '>>'}   </button>
+      return <button className=' button is-large'  onClick={incFunc} > {incValue === 1 ? '>' : '>>'}   </button>
     }
   }
 
@@ -61,15 +52,20 @@ export function CarouselV2({ moviesSearch  }: Props) {
   }
 
   const getDesktopView = () => {
-    const domReturn = extendedMovies.slice(index, index + SW.carColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
+    const domReturn = extMovies.slice(index, index + SW.carColumn).map((mov) => <MovieCard mov={mov}></MovieCard>)
 
 
     return <div className='is-flex is-fullwidth'>
-      {getCarButton(-SW.carColumn)}
+      <div className='is-flex is-flex-direction-column is-justify-content-center'>
       {getCarButton(-1)}
+      {getCarButton(-SW.carColumn)}
+      </div>
       {domReturn}
+      <div className='is-flex is-flex-direction-column is-justify-content-center'>
       {getCarButton(+1)}
       {getCarButton(+SW.carColumn)}
+      </div>
+
     </div>
   }
 
@@ -78,7 +74,7 @@ export function CarouselV2({ moviesSearch  }: Props) {
 
   return (
     <>
-      <h3 id={moviesSearch}> { moviesSearch}</h3>
+      <h3 id={moviesSearch} className={"title mt-6"}> {  moviesSearch.toUpperCase() }</h3>
       {
         SW.isMobile ?
           getMobileView()
