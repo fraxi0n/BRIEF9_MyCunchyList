@@ -1,4 +1,4 @@
-import {  Fragment, useState } from 'react';
+import { useState } from 'react';
 import { useScreenWatch } from '../hooks/useScreenWatch';
 import { CarouselV2 } from '../molecules/CarouselV2';
 import type { SearchOptionType } from '../hooks/useApi';
