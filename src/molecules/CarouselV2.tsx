@@ -1,5 +1,4 @@
-import {  useEffect, useState } from 'react';
-import type { Movie } from '../type';
+import {  useState } from 'react';
 import { MovieCard } from './MovieCard';
 import { useFetch, type SearchOptionType } from '../hooks/useApi';
 import { useScreenWatch } from '../hooks/useScreenWatch';
